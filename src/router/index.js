@@ -20,11 +20,7 @@ const routes = [
     meta: {
       login: true,
     },
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    component: () => import("../views/About.vue"),
   },
   {
     path: "/login",
@@ -46,7 +42,7 @@ const router = new VueRouter({
 // import Store para usar state
 router.beforeEach((to, from, next) => {
   if (to.meta.login == true) {
-    if (Store.state.usuarioActual) {
+    if (Store.state.currentUser) {
       next();
     } else {
       next("/login");

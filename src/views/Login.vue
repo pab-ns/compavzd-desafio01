@@ -3,32 +3,42 @@
     <h1>Login</h1>
     <br />
     <b-container>
-      <img alt="Vue logo" src="../assets/logo.png" />
-      <b-form @submit.prevent="pepitoDoble">
-        <!-- email -->
-        <b-form-group label="Correo electrónico:" label-for="email">
-          <b-form-input
-            id="email"
-            type="email"
-            placeholder="Ejercicio: Ingresa con pablo@gmail.com"
-            required
-            v-model="email"
-          ></b-form-input>
-        </b-form-group>
+      <form @submit.prevent="submitForm">
+        <label for="email">Correo Electrónico</label> <br />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value="Ingresa tu correo"
+          required
+          v-model="email"
+        />
         <br />
-        <!-- password -->
-        <b-form-group label="Contraseña:" label-for="password">
-          <b-form-input
-            id="password"
-            type="password"
-            placeholder="Ejercicio: Ingresa con 123456"
-            required
-            v-model="password"
-          ></b-form-input>
-        </b-form-group>
+        <small secondary>
+          <i>Ejercicio: Ingresa con el correo: pablo@gmail.com</i></small
+        >
+        <br />
+        <br />
 
-        <b-button type="submit" variant="primary">Ingresar</b-button>
-      </b-form>
+        <label for="pass">Contraseña:</label><br />
+        <input
+          type="password"
+          id="pass"
+          name="pass"
+          value="Ingresa tu contraseña"
+          required
+          v-model="password"
+        /><br />
+        <small secondary>
+          <i>Ejercicio: Ingresa con la contraseña: 123456</i></small
+        >
+
+        <br />
+        <br />
+        <hr />
+
+        <input type="submit" value="Ingresar" />
+      </form>
     </b-container>
   </div>
 </template>
@@ -41,7 +51,7 @@ export default {
     password: "",
   }),
   methods: {
-    pepitoDoble() {
+    submitForm() {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
@@ -49,7 +59,7 @@ export default {
         .then((response) => {
           // console.log(response.user.email);
           // llamar a la accion de la store
-          this.$store.dispatch("definirUsuarioActual", {
+          this.$store.dispatch("defineCurrentUser", {
             email: response.user.email,
           });
           this.$router.push("/about");

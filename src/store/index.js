@@ -5,16 +5,16 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    usuarioActual: null,
+    currentUser: null,
   },
   mutations: {
-    SET_CURRENT_USER(state, nuevoUsuario) {
-      state.usuarioActual = nuevoUsuario;
+    SET_CURRENT_USER(state, newUser) {
+      state.currentUser = newUser;
     },
   },
   actions: {
-    definirUsuarioActual(context, usuario) {
-      context.commit("SET_CURRENT_USER", usuario);
+    defineCurrentUser(context, user) {
+      context.commit("SET_CURRENT_USER", user);
     },
   },
   modules: {},
